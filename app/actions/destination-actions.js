@@ -2,6 +2,7 @@ import {
   FETCH_COORDINATES_REQUEST,
   FETCH_COORDINATES_SUCCESS,
   FETCH_COORDINATES_ERROR,
+  CHOOSE_DESTINATION_ON_MAP,
 } from './action-types';
 import { fetchCoordinatesData } from '../services/http-requests';
 
@@ -30,11 +31,17 @@ export const fetchCoordinates = (address: String) => (
   (dispatch: Function) => {
     dispatch(fetchCoordinatesRequest);
     return fetchCoordinatesData(address)
-      .then((destination) => dispatch(fetchCoordinatesSuccess(destination[0], destination[1])))
+      .then(destination => dispatch(fetchCoordinatesSuccess(destination[0], destination[1])))
       .catch(() => fetchCoordinatesError());
   }
 );
 
+export const chooseDestinationOnMap = () => (
+  {
+    type: CHOOSE_DESTINATION_ON_MAP,
+    payload: {},
+  }
+);
 
 // const fetchDirectionsRequest = () => (
 //   {

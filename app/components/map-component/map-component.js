@@ -10,7 +10,6 @@ class MapComponent extends React.Component {
   }
 
   render() {
-    console.log(this.props.destination);
     return (
       <MapView
         region={this.props.region}
