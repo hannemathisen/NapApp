@@ -2,7 +2,7 @@ import { SET_FAKE_MARKER } from '../actions/action-types';
 
 const initialState = {
   coordinates: null,
-  text: 'Click here',
+  text: 'OK',
 };
 
 const buttonReducer = (state: Object = initialState, action: Object) => {

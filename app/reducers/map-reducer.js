@@ -2,6 +2,9 @@ import {
   FETCH_LOCATION_ERROR,
   FETCH_LOCATION_REQUEST,
   SET_REGION,
+  FETCH_CARS_ERROR,
+  FETCH_CARS_REQUEST,
+  FETCH_CARS_SUCCESS,
 } from '../actions/action-types';
 
 const initialState = {
@@ -11,6 +14,7 @@ const initialState = {
     latitudeDelta: 0.05,
     longitudeDelta: 0.05,
   },
+  cars: [],
 };
 
 const mapReducer = (state: Object = initialState, action: Object) => {
@@ -23,15 +27,35 @@ const mapReducer = (state: Object = initialState, action: Object) => {
         region: action.payload.region,
       };
     case FETCH_LOCATION_REQUEST:
-      return Object.assign({}, state, {
+      return {
+        ...state,
         isLoading: true,
-        error: false,
-      });
+      };
     case FETCH_LOCATION_ERROR: {
-      return Object.assign({}, state, {
-        isLoading: false,
+      return {
+        ...state,
         error: true,
-      });
+      };
+    }
+    case FETCH_CARS_REQUEST: {
+      return {
+        ...state,
+        isLoading: true,
+      };
+    }
+    case FETCH_CARS_ERROR: {
+      return {
+        ...state,
+        error: true,
+      };
+    }
+    case FETCH_CARS_SUCCESS: {
+      return {
+        ...state,
+        isLoading: false,
+        error: false,
+        cars: action.payload.cars,
+      };
     }
     default:
       return state;
