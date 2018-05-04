@@ -1,13 +1,14 @@
 import { connect } from 'react-redux';
 import AddressComponent from '../../components/address-component/address-component';
-import { setAddress } from '../../actions/address-actions';
+import { fetchCoordinates } from '../../actions/address-actions';
 
 const mapStateToProps = (state: Object) => ({
   address: state.address.address,
+  coordinates: state.address.coordinates,
 });
 
 const mapDispatchToProps = (dispatch: Function) => ({
-  onPress: region => dispatch(setAddress(region)),
+  onPress: address => dispatch(fetchCoordinates(address)),
 });
 
 export default connect(

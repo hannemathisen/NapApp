@@ -1,4 +1,4 @@
-import { SET_ADDRESS } from '../actions/action-types';
+import { SET_ADDRESS, FETCH_COORDINATES_SUCCESS } from '../actions/action-types';
 
 const initialState = {
   address: '',
@@ -10,6 +10,12 @@ const addressReducer = (state: Object = initialState, action: Object) => {
       return {
         ...state,
         address: action.payload.address,
+      };
+    case FETCH_COORDINATES_SUCCESS:
+      return {
+        ...state,
+        address: action.payload.address,
+        coordinates: action.payload.coordinates,
       };
     default:
       return state;
