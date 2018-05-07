@@ -1,7 +1,7 @@
 // import { SET_FAKE_MARKER } from '../actions/action-types';
 
 const initialState = {
-  car: null,
+  booked: false,
 };
 
 const carReducer = (state: Object = initialState, action: Object) => {

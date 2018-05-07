@@ -4,9 +4,9 @@ import { fetchCoordinates, chooseDestinationOnMap } from '../../actions/destinat
 
 const mapStateToProps = (state: Object) => ({
   address: state.destination.address,
-  coordinates: state.destination.coordinates,
-});
+  active: !state.car.booked && !state.destination.chooseOnMap,
 
+});
 const mapDispatchToProps = (dispatch: Function) => ({
   onPress: address => dispatch(fetchCoordinates(address)),
   chooseOnMap: () => dispatch(chooseDestinationOnMap()),

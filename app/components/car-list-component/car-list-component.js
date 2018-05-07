@@ -4,20 +4,17 @@ import PropTypes from 'prop-types';
 import CarComponent from '../car-component/car-component';
 
 
-const CarListComponent = ({ cars }) => {
-  console.log(cars);
-  return (
-    cars.map(car => (
-      <CarComponent
-        coordinates={car.coordinate}
-        id={car.id}
-        regNr={car.regNr}
-        {...car}
-        key={car.id}
-      />
-    ))
-  );
-};
+const CarListComponent = ({ cars }) => (
+  cars.map(car => (
+    <CarComponent
+      coordinates={car.coordinate}
+      id={car.id}
+      regNr={car.regNr}
+      {...car}
+      key={car.id}
+    />
+  ))
+);
 
 CarListComponent.propTypes = {
   cars: PropTypes.arrayOf(PropTypes.shape({

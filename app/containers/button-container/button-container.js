@@ -1,17 +1,17 @@
 import { connect } from 'react-redux';
 import ButtonComponent from '../../components/button-component/button-component';
-import { setFakeMarker } from '../../actions/button-actions';
+import { fetchAddress } from '../../actions/destination-actions';
 
 const mapStateToProps = (state: Object) => ({
-  text: state.button.text,
   coordinates: {
     latitude: state.map.region.latitude,
     longitude: state.map.region.longitude,
   },
+  active: state.destination.chooseOnMap,
 });
 
 const mapDispatchToProps = (dispatch: Function) => ({
-  onPress: coordinates => dispatch(setFakeMarker(coordinates)),
+  onPress: coordinates => dispatch(fetchAddress(coordinates)),
 });
 
 export default connect(

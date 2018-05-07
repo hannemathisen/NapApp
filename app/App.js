@@ -1,6 +1,6 @@
 import React from 'react';
 import { Provider } from 'react-redux';
-import { View, StyleSheet } from 'react-native';
+import { View, StyleSheet, Image } from 'react-native';
 import configureStore from './store/configureStore';
 import MapContainer from './containers/map-container/map-container';
 import DestinationContainer from './containers/destination-container/destination-container';
@@ -32,6 +32,7 @@ const styles = StyleSheet.create({
 const app = () => (
   <Provider store={store}>
     <View style={styles.container}>
+      <Image source={require('./components/car-component/car.png')} style={{ width: 0, height: 0 }} />
       <MapContainer />
       <View style={styles.topContainer}>
         <DestinationContainer />

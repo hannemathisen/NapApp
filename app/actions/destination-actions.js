@@ -2,9 +2,12 @@ import {
   FETCH_COORDINATES_REQUEST,
   FETCH_COORDINATES_SUCCESS,
   FETCH_COORDINATES_ERROR,
+  FETCH_ADDRESS_REQUEST,
+  FETCH_ADDRESS_SUCCESS,
+  FETCH_ADDRESS_ERROR,
   CHOOSE_DESTINATION_ON_MAP,
 } from './action-types';
-import { fetchCoordinatesData } from '../services/http-requests';
+import { fetchCoordinatesData, fetchAddressData } from '../services/http-requests';
 
 const fetchCoordinatesRequest = () => (
   {
@@ -40,6 +43,36 @@ export const chooseDestinationOnMap = () => (
   {
     type: CHOOSE_DESTINATION_ON_MAP,
     payload: {},
+  }
+);
+
+const fetchAddressRequest = () => (
+  {
+    type: FETCH_ADDRESS_REQUEST,
+    payload: { isLoading: true },
+  }
+);
+
+const fetchAddressSuccess = (coordinates: Object, address: Object) => (
+  {
+    type: FETCH_ADDRESS_SUCCESS,
+    payload: { coordinates, address },
+  }
+);
+
+const fetchAddressError = () => (
+  {
+    type: FETCH_ADDRESS_ERROR,
+    payload: { error: true },
+  }
+);
+
+export const fetchAddress = (coordinates: Object) => (
+  (dispatch: Function) => {
+    dispatch(fetchAddressRequest);
+    return fetchAddressData(coordinates)
+      .then(address => dispatch(fetchAddressSuccess(coordinates, address)))
+      .catch(() => fetchAddressError());
   }
 );
 

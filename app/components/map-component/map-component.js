@@ -32,14 +32,6 @@ class MapComponent extends React.Component {
     );
   }
 }
-// <Image
-//   style={{ width: 20, height: 20 }}
-//   source={require('./car.png')}
-//   onLayout={() => this.forceUpdate()}
-// />
-// {this.props.availableCars.map(car => (
-//   <CarComponent />
-// ))}
 
 MapComponent.propTypes = {
   region: PropTypes.shape({
@@ -59,7 +51,7 @@ MapComponent.propTypes = {
       latitude: PropTypes.number,
       longitude: PropTypes.number,
     }),
-  })),
+  })).isRequired,
   onRegionChange: PropTypes.func.isRequired,
   getLocation: PropTypes.func.isRequired,
   getCars: PropTypes.func.isRequired,

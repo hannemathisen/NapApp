@@ -23,6 +23,21 @@ export const fetchCoordinatesData = (address: String) => (
   .catch(err => err)
 );
 
+export const fetchAddressData = (coordinates: Object) => (
+  fetch(`https://maps.googleapis.com/maps/api/geocode/json?latlng=${coordinates.latitude},${coordinates.longitude}&key=${API_KEY}`)
+  .then((res) => {
+    return res.json();
+  })
+  .then((myJson) => {
+    return myJson.results[0];
+  })
+  .then((destination) => {
+    const address = destination.formatted_address.split(',')[0];
+    return address;
+  })
+  .catch(err => err)
+);
+
 export const fetchCarsData = () => (
   fetch(`http://${HOST}/cars.php/`)
   .then((res) => {
