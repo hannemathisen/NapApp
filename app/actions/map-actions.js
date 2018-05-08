@@ -90,6 +90,6 @@ export const fetchCars = () => (
     dispatch(fetchCarsRequest);
     return fetchCarsData()
       .then(cars => dispatch(fetchCarsSuccess(cars)))
-      .catch(() => fetchCarsError());
+      .catch(() => dispatch(fetchCarsError()));
   }
 );

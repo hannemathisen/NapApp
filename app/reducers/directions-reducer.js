@@ -1,13 +1,15 @@
-import { FETCH_DESTINATION_SUCCESS, SET_PICKUP } from '../actions/action-types';
+import { FETCH_DESTINATION_SUCCESS, FETCH_BEST_CAR_SUCCESS, SET_PICKUP } from '../actions/action-types';
 
 const initialState = {
-  route: [],
+  routeToPickup: [],
+  routeToDestination: [],
   color: 'red',
   pickupCoordinates: {
     latitude: 63,
     longitude: 10,
   },
   destinationCoordinates: null,
+  pickupChanged: false,
 };
 
 const directionsReducer = (state: Object = initialState, action: Object) => {
@@ -15,12 +17,19 @@ const directionsReducer = (state: Object = initialState, action: Object) => {
     case FETCH_DESTINATION_SUCCESS:
       return {
         ...state,
-        route: action.payload.directions,
+        routeToDestination: action.payload.directions,
+      };
+    case FETCH_BEST_CAR_SUCCESS:
+      return {
+        ...state,
+        routeToPickup: action.payload.directions,
+        pickupChanged: false,
       };
     case SET_PICKUP:
       return {
         ...state,
         pickupCoordinates: action.payload.coordinates,
+        pickupChanged: true,
       };
     default:
       return state;

@@ -1,8 +1,10 @@
 import API_KEY from '../lib/config';
+import { getPoints } from '../actions/destination-actions';
 
 /* global fetch: false */
 
 const HOST = 'folk.ntnu.no/hannmath';
+// const HOST = '10.22.36.220/api';
 
 export const fetchCoordinatesData = (address: String) => (
   fetch(`https://maps.googleapis.com/maps/api/geocode/json?address=${address.replace(' ', '+')}&key=${API_KEY}`)
@@ -31,8 +33,11 @@ export const fetchAddressData = (coordinates: Object) => (
 );
 
 export const fetchCarsData = () => (
-  fetch(`http://${HOST}/cars.php/`)
-    .then(res => res.json())
+  fetch(`http://${HOST}/cars.php`)
+    .then((res) => {
+      const result = res.json();
+      return result;
+    })
     .then((cars) => {
       const availableCars = [];
       for (let i = 0; i < cars.length; i += 1) {
@@ -53,3 +58,22 @@ export const fetchCarsData = () => (
     })
     .catch(err => err)
 );
+
+export async function fetchBestCar(available: Array, pickup: Object) {
+  let duration = Infinity;
+  let bestCar = null;
+  let directions = [];
+  const destination = `${pickup.latitude},${pickup.longitude}`;
+  await Promise.all(available.map(async (car) => {
+    const start = `${car.coordinate.latitude},${car.coordinate.longitude}`;
+    const resp = await fetch(`https://maps.googleapis.com/maps/api/directions/json?origin=${start}&destination=${destination}&key=${API_KEY}`);
+    const respJson = await resp.json();
+    const thisDuration = respJson.routes[0].legs[0].duration.value;
+    if (thisDuration < duration) {
+      duration = thisDuration;
+      bestCar = car;
+      directions = getPoints(respJson.routes[0]);
+    }
+  }));
+  return [bestCar, directions];
+}

@@ -7,13 +7,26 @@ const ButtonComponent = ({
   pickupCoordinates,
   destinationCoordinates,
   active,
-  onPress,
+  cars,
+  mustGetNewCar,
+  getAddress,
+  getCar,
 }) => {
-  if (active) {
+  if (active && mustGetNewCar) {
     return (
       <TouchableHighlight
         style={styles.button}
-        onPress={() => onPress(destinationCoordinates, pickupCoordinates)}
+        onPress={() => getAddress(destinationCoordinates, pickupCoordinates) &&
+                getCar(cars, pickupCoordinates)}
+      >
+        <Text style={styles.buttonText}>OK!</Text>
+      </TouchableHighlight>
+    );
+  } else if (active) {
+    return (
+      <TouchableHighlight
+        style={styles.button}
+        onPress={() => getAddress(destinationCoordinates, pickupCoordinates)}
       >
         <Text style={styles.buttonText}>OK!</Text>
       </TouchableHighlight>
@@ -32,7 +45,17 @@ ButtonComponent.propTypes = {
     longitude: PropTypes.number,
   }),
   active: PropTypes.bool.isRequired,
-  onPress: PropTypes.func.isRequired,
+  cars: PropTypes.arrayOf(PropTypes.shape({
+    id: PropTypes.number,
+    regNr: PropTypes.string,
+    coordinates: PropTypes.shape({
+      latitude: PropTypes.number,
+      longitude: PropTypes.number,
+    }),
+  })),
+  mustGetNewCar: PropTypes.bool.isRequired,
+  getAddress: PropTypes.func.isRequired,
+  getCar: PropTypes.func.isRequired,
 };
 
 export default ButtonComponent;

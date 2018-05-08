@@ -3,7 +3,7 @@ import CarListComponent from '../../components/car-list-component/car-list-compo
 // import { fetchCoordinates, chooseDestinationOnMap } from '../../actions/destination-actions';
 
 const mapStateToProps = (state: Object) => ({
-  cars: state.map.cars,
+  cars: state.carList.cars,
 });
 
 // const mapDispatchToProps = (dispatch: Function) => ({

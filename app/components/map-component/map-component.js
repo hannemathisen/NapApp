@@ -8,8 +8,8 @@ import DirectionsContainer from '../../containers/directions-container/direction
 
 class MapComponent extends React.Component {
   componentWillMount() {
-    this.props.getLocation();
     this.props.getCars();
+    this.props.getLocation();
   }
 
   render() {
@@ -20,17 +20,13 @@ class MapComponent extends React.Component {
         style={styles.map}
         onRegionChangeComplete={reg => this.props.onRegionChange(reg)}
       >
-
         {this.props.destination &&
         <Marker
           coordinate={this.props.destination}
         />
         }
-
         <DirectionsContainer />
-
         <CarListContainer />
-
       </MapView>
     );
   }
@@ -47,14 +43,6 @@ MapComponent.propTypes = {
     latitude: PropTypes.number,
     longitude: PropTypes.number,
   }),
-  availableCars: PropTypes.arrayOf(PropTypes.shape({
-    id: PropTypes.number,
-    regNr: PropTypes.string,
-    coordinates: PropTypes.shape({
-      latitude: PropTypes.number,
-      longitude: PropTypes.number,
-    }),
-  })).isRequired,
   onRegionChange: PropTypes.func.isRequired,
   getLocation: PropTypes.func.isRequired,
   getCars: PropTypes.func.isRequired,

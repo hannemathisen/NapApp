@@ -3,7 +3,7 @@ import DirectionsComponent from '../../components/directions-component/direction
 // import { fetchDirections } from '../../actions/directions-actions';
 
 const mapStateToProps = (state: Object) => ({
-  directions: state.directions.route,
+  directions: state.directions.routeToPickup.concat(state.directions.routeToDestination),
   color: state.directions.color,
   pickupCoordinates: state.directions.pickupCoordinates,
   destinationCoordinates: state.destination.coordinates,

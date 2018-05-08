@@ -38,7 +38,7 @@ const fetchDestinationSuccess = (coordinates: Object, address: Object, direction
   }
 );
 
-function getPoints(route) {
+export function getPoints(route) {
   let pointArray = [];
   const polyArray = route.legs[0].steps;
   for (let i = 0; i < polyArray.length; i += 1) {

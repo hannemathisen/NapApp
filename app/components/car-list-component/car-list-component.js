@@ -1,5 +1,4 @@
 import React from 'react';
-// import { Marker } from 'react-native-maps';
 import PropTypes from 'prop-types';
 import CarComponent from '../car-component/car-component';
 
