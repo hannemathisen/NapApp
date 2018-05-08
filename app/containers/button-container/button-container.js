@@ -3,7 +3,8 @@ import ButtonComponent from '../../components/button-component/button-component'
 import { fetchAddress } from '../../actions/destination-actions';
 
 const mapStateToProps = (state: Object) => ({
-  coordinates: {
+  pickupCoordinates: state.directions.pickupCoordinates,
+  destinationCoordinates: {
     latitude: state.map.region.latitude,
     longitude: state.map.region.longitude,
   },
@@ -11,7 +12,8 @@ const mapStateToProps = (state: Object) => ({
 });
 
 const mapDispatchToProps = (dispatch: Function) => ({
-  onPress: coordinates => dispatch(fetchAddress(coordinates)),
+  onPress: (destinationCoordinates, pickupCoordinates) =>
+    dispatch(fetchAddress(destinationCoordinates, pickupCoordinates)),
 });
 
 export default connect(

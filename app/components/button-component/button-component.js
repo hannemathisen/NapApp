@@ -3,12 +3,17 @@ import { TouchableHighlight, Text } from 'react-native';
 import PropTypes from 'prop-types';
 import styles from './styles';
 
-const ButtonComponent = ({ coordinates, active, onPress }) => {
+const ButtonComponent = ({
+  pickupCoordinates,
+  destinationCoordinates,
+  active,
+  onPress,
+}) => {
   if (active) {
     return (
       <TouchableHighlight
         style={styles.button}
-        onPress={() => onPress(coordinates)}
+        onPress={() => onPress(destinationCoordinates, pickupCoordinates)}
       >
         <Text style={styles.buttonText}>OK!</Text>
       </TouchableHighlight>
@@ -18,7 +23,11 @@ const ButtonComponent = ({ coordinates, active, onPress }) => {
 };
 
 ButtonComponent.propTypes = {
-  coordinates: PropTypes.shape({
+  pickupCoordinates: PropTypes.shape({
+    latitude: PropTypes.number.isRequired,
+    longitude: PropTypes.number.isRequired,
+  }).isRequired,
+  destinationCoordinates: PropTypes.shape({
     latitude: PropTypes.number,
     longitude: PropTypes.number,
   }),

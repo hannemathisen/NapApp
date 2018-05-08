@@ -1,5 +1,6 @@
 import {
   SET_REGION,
+  SET_PICKUP,
   FETCH_LOCATION_ERROR,
   FETCH_LOCATION_REQUEST,
   FETCH_CARS_REQUEST,
@@ -10,10 +11,19 @@ import { fetchCarsData } from '../services/http-requests';
 
 /* global navigator */
 
-export const setRegion = (region: Object) => ({
-  type: SET_REGION,
-  payload: { region },
-});
+export const setRegion = (region: Object) => (
+  {
+    type: SET_REGION,
+    payload: { region },
+  }
+);
+
+export const setPickup = (coordinates: Object) => (
+  {
+    type: SET_PICKUP,
+    payload: { coordinates },
+  }
+);
 
 const fetchLocationError = () => (
   {
@@ -40,7 +50,12 @@ export const fetchLocation = () => (
           latitudeDelta: 0.05,
           longitudeDelta: 0.05,
         };
+        const coordinates = {
+          latitude: position.coords.latitude,
+          longitude: position.coords.longitude,
+        };
         dispatch(setRegion(region));
+        dispatch(setPickup(coordinates));
       },
       (error) => {
         dispatch(fetchLocationError);

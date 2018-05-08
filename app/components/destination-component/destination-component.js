@@ -4,7 +4,7 @@ import PropTypes from 'prop-types';
 import styles from './styles';
 
 const DestinationComponent = ({
-  address, active, onPress, chooseOnMap,
+  address, pickup, active, onPress, chooseOnMap,
 }) => {
   let adr = address;
   function setAddress(newAdr) {
@@ -18,12 +18,12 @@ const DestinationComponent = ({
           <TextInput
             placeholder="Where to?"
             style={styles.addressInput}
-            onSubmitEditing={event => onPress(event.nativeEvent.text)}
+            onSubmitEditing={event => onPress(event.nativeEvent.text, pickup)}
             onChangeText={text => setAddress(text)}
           />
           <TouchableHighlight
             style={styles.okButton}
-            onPress={() => onPress(adr) && Keyboard.dismiss()}
+            onPress={() => onPress(adr, pickup) && Keyboard.dismiss()}
           >
             <Text style={styles.buttonText}>OK</Text>
           </TouchableHighlight>
@@ -42,6 +42,10 @@ const DestinationComponent = ({
 
 DestinationComponent.propTypes = {
   address: PropTypes.string.isRequired,
+  pickup: PropTypes.shape({
+    latitude: PropTypes.number.isRequired,
+    longitude: PropTypes.number.isRequired,
+  }).isRequired,
   active: PropTypes.bool.isRequired,
   onPress: PropTypes.func.isRequired,
   chooseOnMap: PropTypes.func.isRequired,

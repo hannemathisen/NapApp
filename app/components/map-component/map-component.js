@@ -3,6 +3,7 @@ import PropTypes from 'prop-types';
 import MapView, { Marker } from 'react-native-maps';
 import styles from './styles';
 import CarListContainer from '../../containers/car-list-container/car-list-container';
+import DirectionsContainer from '../../containers/directions-container/directions-container';
 
 
 class MapComponent extends React.Component {
@@ -25,6 +26,8 @@ class MapComponent extends React.Component {
           coordinate={this.props.destination}
         />
         }
+
+        <DirectionsContainer />
 
         <CarListContainer />
 

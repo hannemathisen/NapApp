@@ -4,11 +4,12 @@ import { fetchCoordinates, chooseDestinationOnMap } from '../../actions/destinat
 
 const mapStateToProps = (state: Object) => ({
   address: state.destination.address,
+  pickup: state.directions.pickupCoordinates,
   active: !state.car.booked && !state.destination.chooseOnMap,
 
 });
 const mapDispatchToProps = (dispatch: Function) => ({
-  onPress: address => dispatch(fetchCoordinates(address)),
+  onPress: (address, pickup) => dispatch(fetchCoordinates(address, pickup)),
   chooseOnMap: () => dispatch(chooseDestinationOnMap()),
 });
 
