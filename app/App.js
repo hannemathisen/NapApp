@@ -6,6 +6,7 @@ import MapContainer from './containers/map-container/map-container';
 import DestinationContainer from './containers/destination-container/destination-container';
 import FakeMarkerContainer from './containers/fake-marker-container/fake-marker-container';
 import ButtonContainer from './containers/button-container/button-container';
+import InfoContainer from './containers/info-container/info-container';
 
 const store = configureStore({});
 
@@ -40,6 +41,12 @@ const app = () => (
       <FakeMarkerContainer />
       <View style={styles.bottomContainer}>
         <ButtonContainer />
+        <InfoContainer
+          type="Pickup"
+        />
+        <InfoContainer
+          type="Destination"
+        />
       </View>
     </View>
   </Provider>

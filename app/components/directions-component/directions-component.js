@@ -3,11 +3,11 @@ import { Polyline } from 'react-native-maps';
 import PropTypes from 'prop-types';
 
 
-const DirectionsComponent = ({ directions, color }) => (
+const DirectionsComponent = ({ directions }) => (
   <Polyline
     coordinates={directions}
     strokeWidth={2}
-    strokeColor={color}
+    strokeColor="red"
   />
 );
 
@@ -16,7 +16,6 @@ DirectionsComponent.propTypes = {
     latitude: PropTypes.number.isRequired,
     longitude: PropTypes.number.isRequired,
   })).isRequired,
-  color: PropTypes.string.isRequired,
 };
 
 export default DirectionsComponent;

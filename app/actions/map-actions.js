@@ -1,13 +1,15 @@
 import {
   SET_REGION,
-  SET_PICKUP,
   FETCH_LOCATION_ERROR,
   FETCH_LOCATION_REQUEST,
   FETCH_CARS_REQUEST,
   FETCH_CARS_ERROR,
   FETCH_CARS_SUCCESS,
+  FETCH_ADDRESS_REQUEST,
+  FETCH_ADDRESS_SUCCESS,
+  FETCH_ADDRESS_ERROR,
 } from './action-types';
-import { fetchCarsData } from '../services/http-requests';
+import { fetchCarsData, fetchAddressData } from '../services/http-requests';
 
 /* global navigator */
 
@@ -18,10 +20,10 @@ export const setRegion = (region: Object) => (
   }
 );
 
-export const setPickup = (coordinates: Object) => (
+export const fetchAddressSuccess = (coordinates: Object, address: String) => (
   {
-    type: SET_PICKUP,
-    payload: { coordinates },
+    type: FETCH_ADDRESS_SUCCESS,
+    payload: { coordinates, address },
   }
 );
 
@@ -36,6 +38,31 @@ const fetchLocationRequest = () => (
   {
     type: FETCH_LOCATION_REQUEST,
     payload: { isLoading: true },
+  }
+);
+
+const fetchAddressRequest = () => (
+  {
+    type: FETCH_ADDRESS_REQUEST,
+    payload: { isLoading: true },
+  }
+);
+
+const fetchAddressError = () => (
+  {
+    type: FETCH_ADDRESS_ERROR,
+    payload: { error: true },
+  }
+);
+
+const fetchAddress = (coordinates: Object) => (
+  (dispatch: Function) => {
+    dispatch(fetchAddressRequest());
+    return fetchAddressData(coordinates)
+      .then((address) => {
+        dispatch(fetchAddressSuccess(coordinates, address));
+      })
+      .catch(() => dispatch(fetchAddressError()));
   }
 );
 
@@ -55,7 +82,7 @@ export const fetchLocation = () => (
           longitude: position.coords.longitude,
         };
         dispatch(setRegion(region));
-        dispatch(setPickup(coordinates));
+        dispatch(fetchAddress(coordinates));
       },
       (error) => {
         dispatch(fetchLocationError);

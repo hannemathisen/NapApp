@@ -1,13 +1,15 @@
 import Polyline from '@mapbox/polyline';
 import {
   FETCH_DESTINATION_REQUEST,
-  FETCH_DESTINATION_SUCCESS,
+  FETCH_DIRECTIONS_SUCCESS,
   FETCH_DESTINATION_ERROR,
   CHOOSE_DESTINATION_ON_MAP,
   FETCH_DIRECTIONS_REQUEST,
 } from './action-types';
 import { fetchCoordinatesData, fetchAddressData } from '../services/http-requests';
 import API_KEY from '../lib/config';
+
+/* global fetch: false */
 
 export const chooseDestinationOnMap = () => (
   {
@@ -31,9 +33,9 @@ const fetchDirectionsRequest = () => (
   }
 );
 
-const fetchDestinationSuccess = (coordinates: Object, address: Object, directions: Array) => (
+const fetchDirectionsSuccess = (coordinates: Object, address: Object, directions: Array) => (
   {
-    type: FETCH_DESTINATION_SUCCESS,
+    type: FETCH_DIRECTIONS_SUCCESS,
     payload: { coordinates, address, directions },
   }
 );
@@ -52,7 +54,6 @@ export function getPoints(route) {
   return directions;
 }
 
-// startCoordinates: Object, `${startCoordinates.latitude},${startCoordinates.longitude}`;
 export function fetchDirections(startCoordinates: Object, endCoordinates: Object, address: String) {
   return function (dispatch) {
     dispatch(fetchDirectionsRequest());
@@ -65,7 +66,7 @@ export function fetchDirections(startCoordinates: Object, endCoordinates: Object
       )
       .then((myJson) => {
         const dir = getPoints(myJson.routes[0]);
-        dispatch(fetchDestinationSuccess(endCoordinates, address, dir));
+        dispatch(fetchDirectionsSuccess(endCoordinates, address, dir));
       });
   };
 }
@@ -90,11 +91,11 @@ export const fetchCoordinates = (address: String, pickup: Object) => (
 
 export const fetchAddress = (coordinates: Object, pickup: Object) => (
   (dispatch: Function) => {
-    dispatch(fetchDestinationRequest);
+    dispatch(fetchDestinationRequest());
     return fetchAddressData(coordinates)
       .then((address) => {
         dispatch(fetchDirections(pickup, coordinates, address));
       })
-      .catch(() => fetchDestinationError());
+      .catch(() => dispatch(fetchDestinationError()));
   }
 );

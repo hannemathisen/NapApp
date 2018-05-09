@@ -1,5 +1,5 @@
 import {
-  FETCH_DESTINATION_SUCCESS,
+  FETCH_DIRECTIONS_SUCCESS,
   CHOOSE_DESTINATION_ON_MAP,
 } from '../actions/action-types';
 
@@ -11,7 +11,7 @@ const initialState = {
 
 const destinationReducer = (state: Object = initialState, action: Object) => {
   switch (action.type) {
-    case FETCH_DESTINATION_SUCCESS:
+    case FETCH_DIRECTIONS_SUCCESS:
       return {
         ...state,
         address: action.payload.address,
