@@ -1,5 +1,5 @@
 import API_KEY from '../lib/config';
-import { getPoints } from '../actions/destination-actions';
+import { getPoints } from '../actions/input-address-actions';
 
 /* global fetch: false */
 

@@ -4,7 +4,7 @@ import PropTypes from 'prop-types';
 import styles from './styles';
 
 const InfoComponent = ({
-  active, type, destinationAddress, pickupAddress, destinationTime, pickupTime,
+  active, type, destinationAddress, pickupAddress, destinationTime, pickupTime, changeAddress,
 }) => {
   let address = destinationAddress;
   let time = destinationTime;
@@ -27,6 +27,7 @@ const InfoComponent = ({
 
         <TouchableHighlight
           style={styles.button}
+          onPress={() => changeAddress(type)}
         >
           <Image
             style={{ width: 30, height: 30 }}
@@ -46,6 +47,7 @@ InfoComponent.propTypes = {
   pickupAddress: PropTypes.string.isRequired,
   destinationTime: PropTypes.string.isRequired,
   pickupTime: PropTypes.string.isRequired,
+  changeAddress: PropTypes.func.isRequired,
 };
 
 export default InfoComponent;

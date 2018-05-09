@@ -4,7 +4,8 @@ import { setRegion, fetchLocation, fetchCars } from '../../actions/map-actions';
 
 const mapStateToProps = (state: Object) => ({
   region: state.map.region,
-  destination: state.destination.coordinates,
+  destination: state.directions.destinationCoordinates,
+  pickup: state.directions.pickupCoordinates,
 });
 
 const mapDispatchToProps = (dispatch: Function) => ({

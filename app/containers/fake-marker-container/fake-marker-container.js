@@ -3,7 +3,7 @@ import FakeMarkerComponent from '../../components/fake-marker-component/fake-mar
 // import { fetchCoordinates, chooseDestinationOnMap } from '../../actions/destination-actions';
 
 const mapStateToProps = (state: Object) => ({
-  active: state.destination.chooseOnMap,
+  active: state.inputAddress.chooseOnMap,
 });
 
 // const mapDispatchToProps = (dispatch: Function) => ({

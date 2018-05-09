@@ -24,11 +24,14 @@ const fetchBestCarError = () => (
 );
 
 
-export const getBestCar = (available: Array, pickup: Object) => (
+export const getBestCar = (available: Array, pickup: Object, mustGetNewCar: Boolean) => (
   (dispatch: Function) => {
-    dispatch(fetchBestCarRequest());
-    return fetchBestCar(available, pickup)
+    if (mustGetNewCar) {
+      dispatch(fetchBestCarRequest());
+      return fetchBestCar(available, pickup)
       .then(car => dispatch(fetchBestCarSuccess(car[0], car[1], car[2])))
       .catch(() => dispatch(fetchBestCarError()));
+    }
+    return null;
   }
 );

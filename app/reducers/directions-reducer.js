@@ -1,16 +1,18 @@
-import { FETCH_DIRECTIONS_SUCCESS, FETCH_BEST_CAR_SUCCESS, FETCH_ADDRESS_SUCCESS } from '../actions/action-types';
+import { FETCH_DIRECTIONS_SUCCESS, FETCH_BEST_CAR_SUCCESS, FETCH_ADDRESS_SUCCESS, FETCH_PICKUP_SUCCESS } from '../actions/action-types';
 
 const initialState = {
   routeToPickup: [],
   timeToPickup: 0,
-  routeToDestination: [],
-  timeToDestination: 0,
   pickupCoordinates: {
     latitude: 63,
     longitude: 10,
   },
   pickupAddress: '',
   pickupChanged: false,
+  routeToDestination: [],
+  timeToDestination: 0,
+  destinationCoordinates: null,
+  destinationAddress: '',
 };
 
 const directionsReducer = (state: Object = initialState, action: Object) => {
@@ -20,6 +22,8 @@ const directionsReducer = (state: Object = initialState, action: Object) => {
         ...state,
         routeToDestination: action.payload.directions,
         timeToDestination: action.payload.duration,
+        destinationAddress: action.payload.address,
+        destinationCoordinates: action.payload.coordinates,
       };
     case FETCH_BEST_CAR_SUCCESS:
       return {
@@ -29,6 +33,13 @@ const directionsReducer = (state: Object = initialState, action: Object) => {
         pickupChanged: false,
       };
     case FETCH_ADDRESS_SUCCESS:
+      return {
+        ...state,
+        pickupCoordinates: action.payload.coordinates,
+        pickupAddress: action.payload.address,
+        pickupChanged: true,
+      };
+    case FETCH_PICKUP_SUCCESS:
       return {
         ...state,
         pickupCoordinates: action.payload.coordinates,

@@ -16,13 +16,19 @@ class MapComponent extends React.Component {
     return (
       <MapView
         region={this.props.region}
-        showsUserLocation
         style={styles.map}
         onRegionChangeComplete={reg => this.props.onRegionChange(reg)}
       >
         {this.props.destination &&
         <Marker
           coordinate={this.props.destination}
+        />
+        }
+        {this.props.pickup &&
+        <Marker
+          coordinate={this.props.pickup}
+          title="Pickup location"
+          pinColor="blue"
         />
         }
         <DirectionsContainer />
@@ -40,6 +46,10 @@ MapComponent.propTypes = {
     longitudeDelta: PropTypes.number.isRequired,
   }).isRequired,
   destination: PropTypes.shape({
+    latitude: PropTypes.number,
+    longitude: PropTypes.number,
+  }),
+  pickup: PropTypes.shape({
     latitude: PropTypes.number,
     longitude: PropTypes.number,
   }),

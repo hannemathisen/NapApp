@@ -3,10 +3,10 @@ import { Provider } from 'react-redux';
 import { View, StyleSheet, Image } from 'react-native';
 import configureStore from './store/configureStore';
 import MapContainer from './containers/map-container/map-container';
-import DestinationContainer from './containers/destination-container/destination-container';
 import FakeMarkerContainer from './containers/fake-marker-container/fake-marker-container';
 import ButtonContainer from './containers/button-container/button-container';
 import InfoContainer from './containers/info-container/info-container';
+import InputAddressContainer from './containers/input-address-container/input-address-container';
 
 const store = configureStore({});
 
@@ -35,11 +35,10 @@ const app = () => (
     <View style={styles.container}>
       <Image source={require('./components/car-component/car.png')} style={{ width: 0, height: 0 }} />
       <MapContainer />
-      <View style={styles.topContainer}>
-        <DestinationContainer />
-      </View>
+      <View style={styles.topContainer} />
       <FakeMarkerContainer />
       <View style={styles.bottomContainer}>
+        <InputAddressContainer />
         <ButtonContainer />
         <InfoContainer
           type="Pickup"

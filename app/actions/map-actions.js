@@ -20,13 +20,6 @@ export const setRegion = (region: Object) => (
   }
 );
 
-export const fetchAddressSuccess = (coordinates: Object, address: String) => (
-  {
-    type: FETCH_ADDRESS_SUCCESS,
-    payload: { coordinates, address },
-  }
-);
-
 const fetchLocationError = () => (
   {
     type: FETCH_LOCATION_ERROR,
@@ -38,6 +31,13 @@ const fetchLocationRequest = () => (
   {
     type: FETCH_LOCATION_REQUEST,
     payload: { isLoading: true },
+  }
+);
+
+const fetchAddressSuccess = (coordinates: Object, address: String) => (
+  {
+    type: FETCH_ADDRESS_SUCCESS,
+    payload: { coordinates, address },
   }
 );
 

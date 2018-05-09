@@ -4,47 +4,53 @@ import PropTypes from 'prop-types';
 import styles from './styles';
 
 const ButtonComponent = ({
+  active,
+  type,
+  coordinates,
   pickupCoordinates,
   destinationCoordinates,
-  active,
+  destinationAddress,
   cars,
   mustGetNewCar,
   getAddress,
   getCar,
 }) => {
-  if (active && mustGetNewCar) {
-    return (
-      <TouchableHighlight
-        style={styles.button}
-        onPress={() => getAddress(destinationCoordinates, pickupCoordinates) &&
-                getCar(cars, pickupCoordinates)}
-      >
-        <Text style={styles.buttonText}>OK!</Text>
-      </TouchableHighlight>
-    );
-  } else if (active) {
-    return (
-      <TouchableHighlight
-        style={styles.button}
-        onPress={() => getAddress(destinationCoordinates, pickupCoordinates)}
-      >
-        <Text style={styles.buttonText}>OK!</Text>
-      </TouchableHighlight>
-    );
+  if (!active) {
+    return null;
   }
-  return null;
+
+  let getNewCar = mustGetNewCar;
+  if (type === 'Pickup') {
+    getNewCar = false;
+  }
+
+  return (
+    <TouchableHighlight
+      style={styles.button}
+      onPress={() => getAddress(coordinates, type, pickupCoordinates, destinationCoordinates, destinationAddress, cars) &&
+              getCar(cars, pickupCoordinates, getNewCar)}
+    >
+      <Text style={styles.buttonText}>OK!</Text>
+    </TouchableHighlight>
+  );
 };
 
 ButtonComponent.propTypes = {
+  active: PropTypes.bool.isRequired,
+  type: PropTypes.string.isRequired,
+  coordinates: PropTypes.shape({
+    latitude: PropTypes.number,
+    longitude: PropTypes.number,
+  }).isRequired,
   pickupCoordinates: PropTypes.shape({
     latitude: PropTypes.number.isRequired,
     longitude: PropTypes.number.isRequired,
   }).isRequired,
   destinationCoordinates: PropTypes.shape({
-    latitude: PropTypes.number,
-    longitude: PropTypes.number,
+    latitude: PropTypes.number.isRequired,
+    longitude: PropTypes.number.isRequired,
   }),
-  active: PropTypes.bool.isRequired,
+  destinationAddress: PropTypes.string.isRequired,
   cars: PropTypes.arrayOf(PropTypes.shape({
     id: PropTypes.number,
     regNr: PropTypes.string,
