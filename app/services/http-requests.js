@@ -75,5 +75,5 @@ export async function fetchBestCar(available: Array, pickup: Object) {
       directions = getPoints(respJson.routes[0]);
     }
   }));
-  return [bestCar, directions];
+  return [bestCar, directions, duration];
 }

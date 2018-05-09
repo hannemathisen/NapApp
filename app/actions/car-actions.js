@@ -9,10 +9,10 @@ const fetchBestCarRequest = () => (
   }
 );
 
-const fetchBestCarSuccess = (car: Object, directions: Array) => (
+const fetchBestCarSuccess = (car: Object, directions: Array, duration: Number) => (
   {
     type: FETCH_BEST_CAR_SUCCESS,
-    payload: { car, directions },
+    payload: { car, directions, duration },
   }
 );
 
@@ -28,7 +28,7 @@ export const getBestCar = (available: Array, pickup: Object) => (
   (dispatch: Function) => {
     dispatch(fetchBestCarRequest());
     return fetchBestCar(available, pickup)
-      .then(car => dispatch(fetchBestCarSuccess(car[0], car[1])))
+      .then(car => dispatch(fetchBestCarSuccess(car[0], car[1], car[2])))
       .catch(() => dispatch(fetchBestCarError()));
   }
 );

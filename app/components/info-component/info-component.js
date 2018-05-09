@@ -4,11 +4,13 @@ import PropTypes from 'prop-types';
 import styles from './styles';
 
 const InfoComponent = ({
-  active, type, destinationAddress, pickupAddress, time,
+  active, type, destinationAddress, pickupAddress, destinationTime, pickupTime,
 }) => {
   let address = destinationAddress;
+  let time = destinationTime;
   if (type === 'Pickup') {
     address = pickupAddress;
+    time = pickupTime;
   }
   if (active) {
     return (
@@ -42,7 +44,8 @@ InfoComponent.propTypes = {
   type: PropTypes.string.isRequired,
   destinationAddress: PropTypes.string.isRequired,
   pickupAddress: PropTypes.string.isRequired,
-  time: PropTypes.string.isRequired,
+  destinationTime: PropTypes.string.isRequired,
+  pickupTime: PropTypes.string.isRequired,
 };
 
 export default InfoComponent;

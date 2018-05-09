@@ -2,7 +2,9 @@ import { FETCH_DIRECTIONS_SUCCESS, FETCH_BEST_CAR_SUCCESS, FETCH_ADDRESS_SUCCESS
 
 const initialState = {
   routeToPickup: [],
+  timeToPickup: 0,
   routeToDestination: [],
+  timeToDestination: 0,
   pickupCoordinates: {
     latitude: 63,
     longitude: 10,
@@ -17,11 +19,13 @@ const directionsReducer = (state: Object = initialState, action: Object) => {
       return {
         ...state,
         routeToDestination: action.payload.directions,
+        timeToDestination: action.payload.duration,
       };
     case FETCH_BEST_CAR_SUCCESS:
       return {
         ...state,
         routeToPickup: action.payload.directions,
+        timeToPickup: action.payload.duration,
         pickupChanged: false,
       };
     case FETCH_ADDRESS_SUCCESS:
