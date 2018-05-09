@@ -7,6 +7,7 @@ import FakeMarkerContainer from './containers/fake-marker-container/fake-marker-
 import ButtonContainer from './containers/button-container/button-container';
 import InfoContainer from './containers/info-container/info-container';
 import InputAddressContainer from './containers/input-address-container/input-address-container';
+import BookCarContainer from './containers/book-car-container/book-car-container';
 
 const store = configureStore({});
 
@@ -46,6 +47,7 @@ const app = () => (
         <InfoContainer
           type="Destination"
         />
+        <BookCarContainer />
       </View>
     </View>
   </Provider>
