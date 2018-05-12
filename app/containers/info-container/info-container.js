@@ -12,7 +12,9 @@ function formatTime(seconds) {
 
 const mapStateToProps = (state: Object) => ({
   active: state.directions.destinationCoordinates !== null &&
-    !state.inputAddress.active && !state.inputAddress.chooseOnMap,
+    !state.inputAddress.active &&
+    !state.inputAddress.chooseOnMap &&
+    !state.carList.carBooked,
   destinationAddress: state.directions.destinationAddress,
   pickupAddress: state.directions.pickupAddress,
   destinationTime: formatTime(state.directions.timeToPickup + state.directions.timeToDestination),

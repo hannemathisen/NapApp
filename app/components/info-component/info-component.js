@@ -6,38 +6,38 @@ import styles from './styles';
 const InfoComponent = ({
   active, type, destinationAddress, pickupAddress, destinationTime, pickupTime, changeAddress,
 }) => {
+  if (!active) {
+    return null;
+  }
   let address = destinationAddress;
   let time = destinationTime;
   if (type === 'Pickup') {
     address = pickupAddress;
     time = pickupTime;
   }
-  if (active) {
-    return (
-      <View style={styles.infoContainer}>
-        <Text style={styles.infoText}>
-          <Text style={styles.labelText}>
-            {type}:{' '}
-          </Text>
-          {address}{'\n'}
-          <Text style={styles.labelText}>
-            Estimated time of {type.toLowerCase()}: {time}
-          </Text>
+  return (
+    <View style={styles.infoContainer}>
+      <Text style={styles.infoText}>
+        <Text style={styles.labelText}>
+          {type}:{' '}
         </Text>
+        {address}{'\n'}
+        <Text style={styles.labelText}>
+          Estimated time of {type.toLowerCase()}: {time}
+        </Text>
+      </Text>
 
-        <TouchableHighlight
-          style={styles.button}
-          onPress={() => changeAddress(type)}
-        >
-          <Image
-            style={{ width: 30, height: 30 }}
-            source={require('./edit.png')}
-          />
-        </TouchableHighlight>
-      </View>
-    );
-  }
-  return null;
+      <TouchableHighlight
+        style={styles.button}
+        onPress={() => changeAddress(type)}
+      >
+        <Image
+          style={{ width: 30, height: 30 }}
+          source={require('./edit.png')}
+        />
+      </TouchableHighlight>
+    </View>
+  );
 };
 
 InfoComponent.propTypes = {

@@ -5,13 +5,16 @@ import {
   FETCH_BEST_CAR_ERROR,
   FETCH_BEST_CAR_REQUEST,
   FETCH_BEST_CAR_SUCCESS,
+  CANCEL_RIDE,
+  BOOK_RIDE,
 } from '../actions/action-types';
 
 const initialState = {
   cars: [],
   isLoading: false,
   error: false,
-  bookedCar: null,
+  reservedCar: null,
+  carBooked: false,
 };
 
 const carListReducer = (state: Object = initialState, action: Object) => {
@@ -51,11 +54,22 @@ const carListReducer = (state: Object = initialState, action: Object) => {
     case FETCH_BEST_CAR_SUCCESS: {
       return {
         ...state,
-        bookedCar: action.payload.car,
+        reservedCar: action.payload.car,
         isLoading: false,
         error: false,
       };
     }
+    case CANCEL_RIDE: {
+      return {
+        ...state,
+        reservedCar: null,
+      };
+    }
+    case BOOK_RIDE:
+      return {
+        ...state,
+        carBooked: true,
+      };
     default:
       return state;
   }

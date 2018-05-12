@@ -3,6 +3,7 @@ import {
   CHOOSE_DESTINATION_ON_MAP,
   CHANGE_ADDRESS,
   FETCH_PICKUP_SUCCESS,
+  CANCEL_RIDE,
 } from '../actions/action-types';
 
 const initialState = {
@@ -35,6 +36,12 @@ const inputAddressReducer = (state: Object = initialState, action: Object) => {
       return {
         ...state,
         active: false,
+      };
+    case CANCEL_RIDE:
+      return {
+        ...state,
+        active: true,
+        type: 'Destination',
       };
     default:
       return state;
