@@ -1,4 +1,4 @@
-import { FETCH_BEST_CAR_REQUEST, FETCH_BEST_CAR_SUCCESS, FETCH_BEST_CAR_ERROR } from './action-types';
+import { FETCH_BEST_CAR_REQUEST, FETCH_BEST_CAR_SUCCESS, FETCH_BEST_CAR_ERROR, MOVE_CAR } from './action-types';
 // import API_KEY from '../lib/config';
 import { fetchBestCar } from '../services/http-requests';
 
@@ -23,14 +23,13 @@ const fetchBestCarError = () => (
   }
 );
 
-
 export const getBestCar = (available: Array, pickup: Object, mustGetNewCar: Boolean) => (
   (dispatch: Function) => {
     if (mustGetNewCar) {
       dispatch(fetchBestCarRequest());
       return fetchBestCar(available, pickup)
-      .then(car => dispatch(fetchBestCarSuccess(car[0], car[1], car[2])))
-      .catch(() => dispatch(fetchBestCarError()));
+        .then(car => dispatch(fetchBestCarSuccess(car[0], car[1], car[2])))
+        .catch(() => dispatch(fetchBestCarError()));
     }
     return null;
   }

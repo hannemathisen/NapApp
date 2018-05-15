@@ -4,6 +4,8 @@ import CarListComponent from '../../components/car-list-component/car-list-compo
 
 const mapStateToProps = (state: Object) => ({
   cars: state.carList.cars,
+  bookedCar: state.carList.reservedCar,
+  carBooked: state.carList.carBooked,
 });
 
 // const mapDispatchToProps = (dispatch: Function) => ({

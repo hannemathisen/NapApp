@@ -4,6 +4,7 @@ import {
   FETCH_ADDRESS_SUCCESS,
   FETCH_PICKUP_SUCCESS,
   CANCEL_RIDE,
+  RIDE_FINISHED,
 } from '../actions/action-types';
 
 const initialState = {
@@ -53,6 +54,14 @@ const directionsReducer = (state: Object = initialState, action: Object) => {
         pickupChanged: true,
       };
     case CANCEL_RIDE:
+      return {
+        ...state,
+        routeToDestination: [],
+        timeToDestination: 0,
+        destinationCoordinates: null,
+        destinationAddress: '',
+      };
+    case RIDE_FINISHED:
       return {
         ...state,
         routeToDestination: [],

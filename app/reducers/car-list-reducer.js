@@ -7,6 +7,8 @@ import {
   FETCH_BEST_CAR_SUCCESS,
   CANCEL_RIDE,
   BOOK_RIDE,
+  MOVE_CAR,
+  RIDE_FINISHED,
 } from '../actions/action-types';
 
 const initialState = {
@@ -69,6 +71,16 @@ const carListReducer = (state: Object = initialState, action: Object) => {
       return {
         ...state,
         carBooked: true,
+      };
+    case MOVE_CAR:
+      return {
+        ...state,
+        reservedCar: action.payload.car,
+      };
+    case RIDE_FINISHED:
+      return {
+        ...state,
+        carBooked: false,
       };
     default:
       return state;

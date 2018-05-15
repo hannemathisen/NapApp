@@ -4,6 +4,7 @@ import {
   CHANGE_ADDRESS,
   FETCH_PICKUP_SUCCESS,
   CANCEL_RIDE,
+  RIDE_FINISHED,
 } from '../actions/action-types';
 
 const initialState = {
@@ -38,6 +39,12 @@ const inputAddressReducer = (state: Object = initialState, action: Object) => {
         active: false,
       };
     case CANCEL_RIDE:
+      return {
+        ...state,
+        active: true,
+        type: 'Destination',
+      };
+    case RIDE_FINISHED:
       return {
         ...state,
         active: true,
