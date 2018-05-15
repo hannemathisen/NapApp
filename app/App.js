@@ -8,6 +8,7 @@ import ButtonContainer from './containers/button-container/button-container';
 import InfoContainer from './containers/info-container/info-container';
 import InputAddressContainer from './containers/input-address-container/input-address-container';
 import BookCarContainer from './containers/book-car-container/book-car-container';
+import RideInfoContainer from './containers/ride-info-container/ride-info-container';
 
 const store = configureStore({});
 
@@ -47,6 +48,7 @@ const app = () => (
         <InfoContainer
           type="Destination"
         />
+        <RideInfoContainer />
         <BookCarContainer />
       </View>
     </View>
