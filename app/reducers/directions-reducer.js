@@ -4,7 +4,7 @@ import {
   FETCH_ADDRESS_SUCCESS,
   FETCH_PICKUP_SUCCESS,
   CANCEL_RIDE,
-  RIDE_FINISHED,
+  CAR_POSITION_SET,
 } from '../actions/action-types';
 
 const initialState = {
@@ -61,13 +61,14 @@ const directionsReducer = (state: Object = initialState, action: Object) => {
         destinationCoordinates: null,
         destinationAddress: '',
       };
-    case RIDE_FINISHED:
+    case CAR_POSITION_SET:
       return {
         ...state,
         routeToDestination: [],
         timeToDestination: 0,
         destinationCoordinates: null,
         destinationAddress: '',
+        pickupChanged: true,
       };
     default:
       return state;

@@ -2,6 +2,7 @@ import API_KEY from '../lib/config';
 import { getPoints } from '../actions/input-address-actions';
 
 /* global fetch: false */
+/* global Request */
 
 const HOST = 'folk.ntnu.no/hannmath';
 // const HOST = '10.22.36.220/api';
@@ -58,6 +59,23 @@ export const fetchCarsData = () => (
     })
     .catch(err => err)
 );
+
+export async function setCarBooking(bookedBit, car) {
+  const request = new Request(`http://${HOST}/cars.php?id=${car.id}`, {
+    method: 'PUT',
+    headers: {
+      'Content-Type': 'application/json',
+    },
+    body: JSON.stringify({
+      booked: bookedBit,
+      latitude: car.coordinate.latitude,
+      longitude: car.coordinate.longitude,
+    }),
+  });
+  // handle response
+  const response = await fetch(request);
+  console.log(response);
+}
 
 export async function fetchBestCar(available: Array, pickup: Object) {
   let duration = Infinity;

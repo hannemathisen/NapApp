@@ -1,4 +1,5 @@
-import { CANCEL_RIDE, BOOK_RIDE, MOVE_CAR, RIDE_FINISHED } from './action-types';
+import { CANCEL_RIDE, BOOK_RIDE, MOVE_CAR } from './action-types';
+import { setCarPosition } from './car-actions';
 
 export const cancelRide = () => (
   {
@@ -21,17 +22,10 @@ const moveCar = (car: Object) => (
   }
 );
 
-const rideFinished = () => (
-  {
-    type: RIDE_FINISHED,
-    payload: {},
-  }
-);
-
 export function driveCar(directions: Array, car: Object, i: Number) {
   return (dispatch: Function) => {
     if (directions.length === 0) {
-      dispatch(rideFinished());
+      dispatch(setCarPosition(car));
       return;
     }
     const dir = [...directions];

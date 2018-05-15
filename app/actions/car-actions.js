@@ -1,6 +1,7 @@
-import { FETCH_BEST_CAR_REQUEST, FETCH_BEST_CAR_SUCCESS, FETCH_BEST_CAR_ERROR, MOVE_CAR } from './action-types';
+import { FETCH_BEST_CAR_REQUEST, FETCH_BEST_CAR_SUCCESS, FETCH_BEST_CAR_ERROR, CAR_POSITION_SET } from './action-types';
 // import API_KEY from '../lib/config';
-import { fetchBestCar } from '../services/http-requests';
+import { fetchBestCar, setCarBooking } from '../services/http-requests';
+import { fetchCars } from './map-actions';
 
 const fetchBestCarRequest = () => (
   {
@@ -23,6 +24,13 @@ const fetchBestCarError = () => (
   }
 );
 
+const carPositionSet = () => (
+  {
+    type: CAR_POSITION_SET,
+    payload: {},
+  }
+);
+
 export const getBestCar = (available: Array, pickup: Object, mustGetNewCar: Boolean) => (
   (dispatch: Function) => {
     if (mustGetNewCar) {
@@ -33,4 +41,10 @@ export const getBestCar = (available: Array, pickup: Object, mustGetNewCar: Bool
     }
     return null;
   }
+);
+
+export const setCarPosition = (car: Object) => (
+  (dispatch: Function) => setCarBooking(0, car)
+    .then(() => dispatch(carPositionSet()))
+    .then(() => dispatch(fetchCars()))
 );

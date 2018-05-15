@@ -30,3 +30,4 @@ export const CANCEL_RIDE = 'CANCEL_RIDE';
 export const BOOK_RIDE = 'BOOK_RIDE';
 export const MOVE_CAR = 'MOVE_CAR';
 export const RIDE_FINISHED = 'RIDE_FINISHED';
+export const CAR_POSITION_SET = 'CAR_POSITION_SET';

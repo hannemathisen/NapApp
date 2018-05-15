@@ -8,7 +8,7 @@ import {
   CANCEL_RIDE,
   BOOK_RIDE,
   MOVE_CAR,
-  RIDE_FINISHED,
+  CAR_POSITION_SET,
 } from '../actions/action-types';
 
 const initialState = {
@@ -77,7 +77,7 @@ const carListReducer = (state: Object = initialState, action: Object) => {
         ...state,
         reservedCar: action.payload.car,
       };
-    case RIDE_FINISHED:
+    case CAR_POSITION_SET:
       return {
         ...state,
         carBooked: false,
