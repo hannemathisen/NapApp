@@ -21,8 +21,9 @@ export default StyleSheet.create({
   button: {
     alignItems: 'center',
     padding: 10,
+    paddingRight: 20,
     width: 50,
-    backgroundColor: 'black',
+    backgroundColor: 'white',
   },
   buttonText: {
     fontSize: 12,

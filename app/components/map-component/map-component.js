@@ -1,5 +1,6 @@
 import React from 'react';
 import PropTypes from 'prop-types';
+import { Image } from 'react-native';
 import MapView, { Marker } from 'react-native-maps';
 import styles from './styles';
 import CarListContainer from '../../containers/car-list-container/car-list-container';
@@ -28,8 +29,12 @@ class MapComponent extends React.Component {
         <Marker
           coordinate={this.props.pickup}
           title="Pickup location"
-          pinColor="blue"
-        />
+        >
+          <Image
+            style={{ width: 7, height: 7 }}
+            source={require('./location.png')}
+          />
+        </Marker>
         }
         <DirectionsContainer />
         <CarListContainer />

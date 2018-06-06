@@ -7,7 +7,7 @@ const mapStateToProps = (state: Object) => ({
     !state.inputAddress.active &&
     !state.inputAddress.chooseOnMap &&
     !state.carList.carBooked,
-  directions: state.directions.routeToPickup.concat(state.directions.routeToDestination),
+  directions: state.directions.routeToPickup, // .concat(state.directions.routeToDestination),
   car: state.carList.reservedCar,
 });
 
@@ -15,7 +15,7 @@ const mapStateToProps = (state: Object) => ({
 const mapDispatchToProps = (dispatch: Function) => ({
   cancelRide: () => dispatch(cancelRide()),
   bookRide: () => dispatch(bookRide()),
-  driveCar: (directions, car, i) => dispatch(driveCar(directions, car, i)),
+  driveCar: (directions, car) => dispatch(driveCar(directions, car, 0, 'Pickup', null)),
 });
 
 export default connect(mapStateToProps, mapDispatchToProps)(BookCarComponent);

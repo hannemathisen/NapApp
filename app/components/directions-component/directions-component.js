@@ -3,7 +3,9 @@ import { Polyline } from 'react-native-maps';
 import PropTypes from 'prop-types';
 
 
-const DirectionsComponent = ({ active, directions }) => {
+const DirectionsComponent = ({
+  active, directions,
+}) => {
   if (!active) {
     return null;
   }

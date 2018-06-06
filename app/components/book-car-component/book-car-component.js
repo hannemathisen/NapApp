@@ -20,7 +20,7 @@ const BookCarComponent = ({
       <TouchableHighlight
         style={styles.button}
         onPress={() => bookRide() &&
-                driveCar(directions, car, 0)}
+                driveCar(directions, car)}
       >
         <Text style={styles.buttonText}>Book car</Text>
       </TouchableHighlight>

@@ -17,7 +17,10 @@ const InfoComponent = ({
   }
   return (
     <View style={styles.infoContainer}>
-      <Text style={styles.infoText}>
+      <Text
+        style={styles.infoText}
+        onPress={() => changeAddress(type)}
+      >
         <Text style={styles.labelText}>
           {type}:{' '}
         </Text>
@@ -33,7 +36,7 @@ const InfoComponent = ({
       >
         <Image
           style={{ width: 30, height: 30 }}
-          source={require('./edit.png')}
+          source={require('./pencil.png')}
         />
       </TouchableHighlight>
     </View>

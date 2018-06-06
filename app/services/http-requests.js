@@ -43,6 +43,7 @@ export const fetchCarsData = () => (
       const availableCars = [];
       for (let i = 0; i < cars.length; i += 1) {
         const car = cars[i];
+        // legg til if-en i php?
         if (car.booked === '0') {
           const availableCar = {
             id: parseInt(car.id, 10),
@@ -77,10 +78,37 @@ export async function setCarBooking(bookedBit, car) {
   console.log(response);
 }
 
+export async function addRide(car, places) {
+  const request = new Request(`http://${HOST}/rides.php`, {
+    method: 'POST',
+    headers: {
+      Accept: 'application/json',
+      'Content-Type': 'application/json',
+    },
+    body: JSON.stringify({
+      car_id: car.id,
+      user_id: 1,   // fix when handling login
+      start_latitude: places.startCoordinates.latitude,
+      start_longitude: places.startCoordinates.longitude,
+      start_time: (Date.now() / 1000) - places.startTime,
+      via_latitude: places.pickupCoordinates.latitude,
+      via_longitude: places.pickupCoordinates.longitude,
+      via_time: (Date.now() / 1000) - places.pickupTime,
+      end_latitude: places.destinationCoordinates.latitude,
+      end_longitude: places.destinationCoordinates.longitude,
+      end_time: Date.now() / 1000,
+    }),
+  });
+  // handle response
+  const response = await fetch(request);
+  console.log(response);
+}
+
 export async function fetchBestCar(available: Array, pickup: Object) {
   let duration = Infinity;
   let bestCar = null;
   let directions = [];
+  let bounds = null;
   const destination = `${pickup.latitude},${pickup.longitude}`;
   await Promise.all(available.map(async (car) => {
     const start = `${car.coordinate.latitude},${car.coordinate.longitude}`;
@@ -91,7 +119,8 @@ export async function fetchBestCar(available: Array, pickup: Object) {
       duration = thisDuration;
       bestCar = car;
       directions = getPoints(respJson.routes[0]);
+      bounds = respJson.routes[0].bounds;
     }
   }));
-  return [bestCar, directions, duration];
+  return [bestCar, directions, duration, bounds];
 }

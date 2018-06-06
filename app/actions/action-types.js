@@ -31,3 +31,7 @@ export const BOOK_RIDE = 'BOOK_RIDE';
 export const MOVE_CAR = 'MOVE_CAR';
 export const RIDE_FINISHED = 'RIDE_FINISHED';
 export const CAR_POSITION_SET = 'CAR_POSITION_SET';
+export const AT_PICKUP = 'AT_PICKUP';
+export const AFTER_PICKUP = 'AFTER_PICKUP';
+
+export const RIDE_ADDED = 'RIDE_ADDED';

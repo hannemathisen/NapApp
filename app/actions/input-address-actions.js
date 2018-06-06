@@ -79,11 +79,11 @@ const fetchDirectionsRequest = () => (
 );
 
 const fetchDirectionsSuccess =
-  (coordinates: Object, address: Object, directions: Array, duration: Number) => (
+  (coordinates: Object, address: Object, directions: Array, duration: Number, bounds: Object) => (
     {
       type: FETCH_DIRECTIONS_SUCCESS,
       payload: {
-        coordinates, address, directions, duration,
+        coordinates, address, directions, duration, bounds,
       },
     }
   );
@@ -101,7 +101,9 @@ export function fetchDirections(startCoordinates: Object, endCoordinates: Object
       .then((myJson) => {
         const dir = getPoints(myJson.routes[0]);
         const duration = myJson.routes[0].legs[0].duration.value;
-        dispatch(fetchDirectionsSuccess(endCoordinates, address, dir, duration));
+        const bounds = myJson.routes[0].bounds;
+        console.log(bounds);
+        dispatch(fetchDirectionsSuccess(endCoordinates, address, dir, duration, bounds));
       });
   };
 }
