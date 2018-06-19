@@ -4,7 +4,7 @@ import { getPoints } from '../actions/input-address-actions';
 /* global fetch: false */
 /* global Request */
 
-const HOST = 'folk.ntnu.no/hannmath';
+const HOST = 'host';
 // const HOST = '10.22.36.220/api';
 
 export const fetchCoordinatesData = (address: String) => (
@@ -34,7 +34,7 @@ export const fetchAddressData = (coordinates: Object) => (
 );
 
 export const fetchCarsData = () => (
-  fetch(`http://${HOST}/cars.php`)
+  fetch(`http://${HOST}/cars`)
     .then((res) => {
       const result = res.json();
       return result;
@@ -62,7 +62,7 @@ export const fetchCarsData = () => (
 );
 
 export async function setCarBooking(bookedBit, car) {
-  const request = new Request(`http://${HOST}/cars.php?id=${car.id}`, {
+  const request = new Request(`http://${HOST}/cars/${car.id}`, {
     method: 'PUT',
     headers: {
       'Content-Type': 'application/json',
@@ -79,7 +79,7 @@ export async function setCarBooking(bookedBit, car) {
 }
 
 export async function addRide(car, places) {
-  const request = new Request(`http://${HOST}/rides.php`, {
+  const request = new Request(`http://${HOST}/rides`, {
     method: 'POST',
     headers: {
       Accept: 'application/json',
