@@ -37,6 +37,7 @@ const app = () => (
   <Provider store={store}>
     <View style={styles.container}>
       <Image source={require('./components/car-component/car.png')} style={{ width: 0, height: 0 }} />
+      <Image source={require('./components/map-component/location.png')} style={{ width: 0, height: 0 }} />
       <MapContainer />
       <View style={styles.topContainer} />
       <FakeMarkerContainer />

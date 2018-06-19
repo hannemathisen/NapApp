@@ -71,16 +71,29 @@ export const fetchLocation = () => (
     dispatch(fetchLocationRequest);
     navigator.geolocation.getCurrentPosition(
       (position) => {
-        const region = {
+        let region = {
           latitude: position.coords.latitude,
           longitude: position.coords.longitude,
           latitudeDelta: 0.05,
           longitudeDelta: 0.05,
         };
-        const coordinates = {
+        let coordinates = {
           latitude: position.coords.latitude,
           longitude: position.coords.longitude,
         };
+        if ((position.coords.latitude > 63.5 || position.coords.latitude < 63)
+          && (position.coords.longitude > 11 || position.coords.longitude < 9.5)) {
+          coordinates = {
+            latitude: 63.419567,
+            longitude: 10.401914,
+          };
+          region = {
+            latitude: 63.419567,
+            longitude: 10.401914,
+            latitudeDelta: 0.05,
+            longitudeDelta: 0.05,
+          };
+        }
         dispatch(setRegion(region));
         dispatch(fetchAddress(coordinates));
       },
